@@ -20,11 +20,12 @@ import { LandingThemeCustomizer, LandingThemeCustomizerTrigger } from './compone
 
 export function LandingPageContent() {
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false)
+  const [teamSectionVisible, setTeamSectionVisible] = React.useState(false)
 
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <LandingNavbar />
+      <LandingNavbar onTeamClick={() => setTeamSectionVisible(!teamSectionVisible)} />
 
       {/* Main Content */}
       <main>
@@ -48,7 +49,7 @@ export function LandingPageContent() {
         <EcommerceSection />
 
         {/* Team Section */}
-        <TeamSection />
+        {teamSectionVisible && <TeamSection />}
 
         {/* Testimonials */}
         <TestimonialsSection />

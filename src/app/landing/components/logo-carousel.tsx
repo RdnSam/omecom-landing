@@ -46,14 +46,14 @@ export function LogoCarousel() {
                 {omecomClients.map((client, index) => (
                   <Card
                     key={`first-${index}`}
-                    className="flex-shrink-0 flex items-center justify-center h-20 w-40 opacity-60 hover:opacity-100 transition-opacity duration-300 border-0 shadow-none bg-transparent"
+                    className="flex-shrink-0 flex items-center justify-center h-28 w-52 opacity-90 hover:opacity-100 transition-opacity duration-300 border-0 shadow-none bg-transparent"
                   >
-                    <div className="relative w-32 h-16">
+                    <div className="relative w-44 h-24">
                       <Image
                         src={client.logo}
                         alt={`${client.name} logo`}
                         fill
-                        className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        className="object-contain transition-all duration-300"
                       />
                     </div>
                   </Card>
@@ -62,14 +62,14 @@ export function LogoCarousel() {
                 {omecomClients.map((client, index) => (
                   <Card
                     key={`second-${index}`}
-                    className="flex-shrink-0 flex items-center justify-center h-20 w-40 opacity-60 hover:opacity-100 transition-opacity duration-300 border-0 shadow-none bg-transparent"
+                    className="flex-shrink-0 flex items-center justify-center h-28 w-52 opacity-90 hover:opacity-100 transition-opacity duration-300 border-0 shadow-none bg-transparent"
                   >
-                    <div className="relative w-32 h-16">
+                    <div className="relative w-44 h-24">
                       <Image
                         src={client.logo}
                         alt={`${client.name} logo`}
                         fill
-                        className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        className="object-contain transition-all duration-300"
                       />
                     </div>
                   </Card>

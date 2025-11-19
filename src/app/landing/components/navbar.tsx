@@ -67,7 +67,11 @@ const smoothScrollTo = (targetId: string) => {
   }
 }
 
-export function LandingNavbar() {
+interface LandingNavbarProps {
+  onTeamClick?: () => void
+}
+
+export function LandingNavbar({ onTeamClick }: LandingNavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [solutionsOpen, setSolutionsOpen] = useState(false)
   const { setTheme, theme } = useTheme()
@@ -104,7 +108,10 @@ export function LandingNavbar() {
                     className="group inline-flex h-10 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-colors hover:text-primary focus:text-primary focus:outline-none cursor-pointer"
                     onClick={(e: React.MouseEvent) => {
                       e.preventDefault()
-                      if (item.href.startsWith('#')) {
+                      if (item.href === '#team' && onTeamClick) {
+                        onTeamClick()
+                        setTimeout(() => smoothScrollTo(item.href), 100)
+                      } else if (item.href.startsWith('#')) {
                         smoothScrollTo(item.href)
                       } else {
                         window.location.href = item.href
@@ -212,7 +219,11 @@ export function LandingNavbar() {
                           className="flex items-center px-4 py-3 text-base font-medium rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
                           onClick={(e) => {
                             setIsOpen(false)
-                            if (item.href.startsWith('#')) {
+                            if (item.href === '#team' && onTeamClick) {
+                              e.preventDefault()
+                              onTeamClick()
+                              setTimeout(() => smoothScrollTo(item.href), 100)
+                            } else if (item.href.startsWith('#')) {
                               e.preventDefault()
                               setTimeout(() => smoothScrollTo(item.href), 100)
                             }
