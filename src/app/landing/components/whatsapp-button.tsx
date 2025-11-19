@@ -4,7 +4,7 @@ import { MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function WhatsAppButton() {
-  const whatsappNumber = "6281234567890" // Replace with actual Omecom WhatsApp number
+  const whatsappNumber = "6281315151615" // Replace with actual Omecom WhatsApp number
   const message = "Halo, saya ingin mengetahui lebih lanjut tentang produk Omecom"
 
   const handleClick = () => {

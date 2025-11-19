@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { LandingNavbar } from './components/navbar'
-import { HeroSection } from './components/hero-section'
+import { HeroCarousel } from './components/hero-carousel'
 import { FeaturesSection } from './components/features-section'
 import { ProductShowcaseSection } from './components/product-showcase-section'
 import { AboutSection } from './components/about-section'
@@ -29,8 +29,8 @@ export function LandingPageContent() {
 
       {/* Main Content */}
       <main>
-        {/* Hero Section with Product Carousel */}
-        <HeroSection />
+        {/* Hero Carousel: Slide 1 (Enhanced Hero) + Slide 2 (Produk Unggulan + Cosmo Card) */}
+        <HeroCarousel />
 
         {/* Product Categories (Chemical, Hygiene, Services) */}
         <FeaturesSection />

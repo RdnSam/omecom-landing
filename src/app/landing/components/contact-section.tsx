@@ -1,8 +1,10 @@
 "use client"
 
+import { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { Turnstile } from '@marsidev/react-turnstile'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -37,6 +39,8 @@ const contactFormSchema = z.object({
 })
 
 export function ContactSection() {
+  const [turnstileToken, setTurnstileToken] = useState<string>('')
+
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -49,10 +53,18 @@ export function ContactSection() {
   })
 
   function onSubmit(values: z.infer<typeof contactFormSchema>) {
-    // Here you would typically send the form data to your backend
-    console.log(values)
-    // You could also show a success message or redirect
+    // Include turnstile token in submission
+    console.log({
+      ...values,
+      turnstileToken,
+    })
+
+    // Reset form and turnstile
     form.reset()
+    setTurnstileToken('')
+
+    // You could also show a success message
+    alert('Pesan berhasil dikirim! Kami akan segera menghubungi Anda.')
   }
 
   return (
@@ -80,12 +92,12 @@ export function ContactSection() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-3">
-                  Jl. Raya Bekasi KM 25 No. 45<br />
-                  Jakarta Timur 13950<br />
+                  Jl. Pos Pengumben Lama No. 39B<br />
+                  Jakarta Barat <br />
                   Indonesia
                 </p>
                 <Button variant="outline" size="sm" className="cursor-pointer" asChild>
-                  <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.google.com/maps/place/PT.+Omecom+Mitra+Solusi+-+Jakarta+Office/@-6.217727,106.762388,16z/data=!4m14!1m7!3m6!1s0x2e69f72ce51e86b7:0xc2fcc090d2dd99a3!2sPT.+Omecom+Mitra+Solusi+-+Jakarta+Office!8m2!3d-6.2177274!4d106.7623876!16s%2Fg%2F11crvb6dhg!3m5!1s0x2e69f72ce51e86b7:0xc2fcc090d2dd99a3!8m2!3d-6.2177274!4d106.7623876!16s%2Fg%2F11crvb6dhg?hl=id&entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
                     Buka di Maps
                   </a>
                 </Button>
@@ -104,10 +116,10 @@ export function ContactSection() {
                   Telepon: (021) 8888-9999
                 </p>
                 <p className="text-muted-foreground mb-3">
-                  WhatsApp: 081315151615
+                  WhatsApp: +62 813-1515-1615
                 </p>
                 <Button variant="outline" size="sm" className="cursor-pointer" asChild>
-                  <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/+6281315151615" target="_blank" rel="noopener noreferrer">
                     Chat WhatsApp
                   </a>
                 </Button>
@@ -123,7 +135,7 @@ export function ContactSection() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-1">
-                  Senin - Jumat: 08:00 - 17:00
+                  Senin - Jumat: 09:00 - 17:00
                 </p>
                 <p className="text-muted-foreground mb-1">
                   Sabtu: 08:00 - 14:00
@@ -219,8 +231,27 @@ export function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full cursor-pointer">
-                      Kirim Pesan
+
+                    {/* Cloudflare Turnstile CAPTCHA */}
+                    <div className="flex justify-center">
+                      <Turnstile
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+                        onSuccess={setTurnstileToken}
+                        onError={() => setTurnstileToken('')}
+                        onExpire={() => setTurnstileToken('')}
+                        options={{
+                          theme: 'auto',
+                          size: 'normal',
+                        }}
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full cursor-pointer"
+                      disabled={!turnstileToken}
+                    >
+                      {turnstileToken ? 'Kirim Pesan' : 'Lengkapi CAPTCHA untuk mengirim'}
                     </Button>
                   </form>
                 </Form>

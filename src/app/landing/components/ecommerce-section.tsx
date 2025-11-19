@@ -10,7 +10,7 @@ export function EcommerceSection() {
       name: 'Shopee',
       icon: '/shopee-logo.svg', // Replace with actual logo path
       url: 'https://shopee.co.id/Tisu-higienis-standar-industri-dan-profesional-COSMO*-MR-50-i.257362637.24016739580',
-      description: 'Belanja produk Omecom di Shopee dengan berbagai promo menarik',
+      description: 'Belanja produk Omecom di Shopee dengan berbagai promo',
       color: 'bg-orange-500',
     },
     {

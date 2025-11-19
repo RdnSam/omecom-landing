@@ -39,9 +39,12 @@ const stats = [
 
 export function StatsSection() {
   return (
-    <section className="py-12 sm:py-16 relative">
-      {/* Background with transparency */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/20" />
+    <section className="py-12 sm:py-16 relative overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-secondary/10 animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-secondary/8 via-transparent to-primary/8 animate-gradient-slow" />
+      </div>
       <DotPattern className="opacity-75" size="md" fadeStyle="circle" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
